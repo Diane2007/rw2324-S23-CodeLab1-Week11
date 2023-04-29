@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     {
         //no next button when the game begins
         nextButton.gameObject.SetActive(false);
+        objectName.gameObject.SetActive(false);
         
         //define file paths
         TEXT_PATH = Application.dataPath + TEXT_DIR + TEXT_NAME;
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     void DialogueSystem()
     {
-        //TODO Write the dialogue system code! Like typewriter!
+        //TODO Fix the typing time issue
 
         //define the new text path to load
         string newTextPath = TEXT_PATH.Replace("Num", currentTextFile + "");
@@ -82,19 +83,28 @@ public class GameManager : MonoBehaviour
             
             //break down the line into individual characters and put in an array
             char[] lineChar = lineContents.ToCharArray();
-            
+
             //start typing individual characters!!
-            for (int charNum = 0; charNum < lineChar.Length + 1; charNum++)
-            {
-                //every character takes 0.05 sec to type
-                Invoke("Type(charNum, lineChar)", 0.05f);
-            }
+             for (int charNum = 0; charNum < lineChar.Length + 1; charNum++)
+             {
+                 //every character takes 0.05 sec to type
+                 if (charNum < lineChar.Length)
+                 {
+                     dialogue.text += lineChar[charNum];
+                 }
+                 else if (charNum == lineChar.Length)
+                 {
+                     dialogue.text += "\n" + "\n";
+                 }
+             }
         }
         typewriterSound.Stop();
+        nextButton.gameObject.SetActive(true);
         
     }
 
-    void Type(int num, char[] charArray)
+    //TODO: figure out how to invoke with parameters
+     void Type(int num, char[] charArray)
     {
         //type characters
         if (num < charArray.Length)
