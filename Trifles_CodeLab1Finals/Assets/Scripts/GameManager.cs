@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI dialogue, objectName;
     public Button nextButton;
-    
+    public GameObject map1, map2;
+
+
     //init File.IO stuff
     const string TEXT_NAME = "textNum.txt";
     const string TEXT_DIR = "/Resources/Texts/";
@@ -30,7 +32,7 @@ public class GameManager : MonoBehaviour
         set
         {
             currentTextFile = value;
-            Invoke("DialogueSystem", 1);
+            Invoke("DialogueSystem", 0.1f);
         }
     }
 
@@ -52,6 +54,10 @@ public class GameManager : MonoBehaviour
         //no next button when the game begins
         nextButton.gameObject.SetActive(false);
         objectName.gameObject.SetActive(false);
+        
+        //no maps at the beginning of the game
+        map1.gameObject.SetActive(false);
+        map2.gameObject.SetActive(false);
         
         //define file paths
         TEXT_PATH = Application.dataPath + TEXT_DIR + TEXT_NAME;
