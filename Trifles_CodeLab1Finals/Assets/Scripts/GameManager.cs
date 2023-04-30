@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     
     //UI elements
     public GameObject map1, map2, player;
+    public Button forward, backward, left, right;
 
     //init File.IO stuff
     const string TEXT_NAME = "textNum.txt";
@@ -38,23 +39,16 @@ public class GameManager : MonoBehaviour
             {
                 DialogueSystem();
             }
-            else if (currentTextFile == 4)
+            else if (currentTextFile == 4)  //we enter the house here
             {
+                //show the player and 1 fl minimap
+                map1.gameObject.SetActive(true);
+                player.gameObject.SetActive(true);
+                EnableLocationButtons(true);
                 
+                //load scriptable object files
+                ScrObjWithDialogue();
             }
-        }
-    }
-
-    public void LoadText()
-    {
-        if (currentTextFile < 4)
-        {
-            CurrentTextFile++;
-        }
-
-        else if (currentTextFile == 4)
-        {
-            map1.gameObject.SetActive(true);
         }
     }
 
@@ -81,6 +75,7 @@ public class GameManager : MonoBehaviour
         map1.gameObject.SetActive(false);
         map2.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
+        EnableLocationButtons(false);
 
         //define file paths
         TEXT_PATH = Application.dataPath + TEXT_DIR + TEXT_NAME;
@@ -91,6 +86,14 @@ public class GameManager : MonoBehaviour
         //start the dialogue
         DialogueSystem();
         
+    }
+
+    void EnableLocationButtons(bool state)
+    {
+        forward.gameObject.SetActive(state);
+        backward.gameObject.SetActive(state);
+        left.gameObject.SetActive(state);
+        right.gameObject.SetActive(state);
     }
 
     //TODO Fix the typing time issue
@@ -128,6 +131,12 @@ public class GameManager : MonoBehaviour
         }
         typewriterSound.Stop();
         nextButton.gameObject.SetActive(true);
+        
+    }
+
+    //TODO incorporate scriptable objects with dialogue system
+    void ScrObjWithDialogue()
+    {
         
     }
 

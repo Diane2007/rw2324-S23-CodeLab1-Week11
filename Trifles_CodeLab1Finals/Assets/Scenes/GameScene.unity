@@ -1703,6 +1703,10 @@ MonoBehaviour:
   map1: {fileID: 1325377840}
   map2: {fileID: 1661676288}
   player: {fileID: 1095961694}
+  forward: {fileID: 1914717732}
+  backward: {fileID: 294365152}
+  left: {fileID: 334627129}
+  right: {fileID: 968003475}
   typewriterSound: {fileID: 1206315203}
 --- !u!82 &1206315203
 AudioSource:
