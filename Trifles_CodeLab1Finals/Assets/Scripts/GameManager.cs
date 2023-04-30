@@ -5,18 +5,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-using System.Net.Mime;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public TextMeshProUGUI dialogue, objectName;
+    public TextMeshProUGUI dialogue;
+    public TextMeshProUGUI location;
     public Button nextButton;
     
     //UI elements
     public GameObject map1, map2, player;
     public Button forward, backward, left, right;
+    
+    //connect with scriptable objects
+    public LocationScriptableObject currentLocation;
 
     //init File.IO stuff
     const string TEXT_NAME = "textNum.txt";
@@ -25,7 +29,7 @@ public class GameManager : MonoBehaviour
     string TEXT_PATH;
 
     public AudioSource typewriterSound;
-    
+
     //numbers to load texts
     int currentTextFile = 0;
     public int CurrentTextFile
@@ -44,6 +48,9 @@ public class GameManager : MonoBehaviour
                 //show the player and 1 fl minimap
                 map1.gameObject.SetActive(true);
                 player.gameObject.SetActive(true);
+                
+                //enable the rest of UI elements
+                location.gameObject.SetActive(true);
                 EnableLocationButtons(true);
                 
                 //load scriptable object files
@@ -69,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         //no next button when the game begins
         nextButton.gameObject.SetActive(false);
-        objectName.gameObject.SetActive(false);
+        location.gameObject.SetActive(false);
         
         //disable UI elements until player enters the ground floor
         map1.gameObject.SetActive(false);
@@ -88,6 +95,7 @@ public class GameManager : MonoBehaviour
         
     }
 
+    //controlling all direction buttons in one go to make life easier
     void EnableLocationButtons(bool state)
     {
         forward.gameObject.SetActive(state);
@@ -137,6 +145,7 @@ public class GameManager : MonoBehaviour
     //TODO incorporate scriptable objects with dialogue system
     void ScrObjWithDialogue()
     {
+        location.text = currentLocation.locationName;
         
     }
 

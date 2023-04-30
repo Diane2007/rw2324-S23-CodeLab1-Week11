@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b13f3c499534f3ea9caeac184b9262, type: 3}
+  m_Name: 1fl Living Room
+  m_EditorClassIdentifier: 
+  locationName: Living Room
+  locationDescription: {fileID: 4900000, guid: 1b38a0a3df9a44c4a44629cbb3d89180, type: 3}
+  forwardLocation: {fileID: 11400000, guid: 274326aed6f2a4e28b5cf00a7430b103, type: 2}
+  backwardLocation: {fileID: 11400000, guid: 2dd99e681ff0b4e90bac1cb28cbe8074, type: 2}
+  leftLocation: {fileID: 0}
+  rightLocation: {fileID: 11400000, guid: fb9b8eecfacb54c4ebf7d055d2053e20, type: 2}

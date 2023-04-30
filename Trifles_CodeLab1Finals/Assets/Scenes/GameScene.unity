@@ -1323,7 +1323,7 @@ GameObject:
   - component: {fileID: 948738662}
   - component: {fileID: 948738661}
   m_Layer: 5
-  m_Name: ObjectName
+  m_Name: LocationName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1698,7 +1698,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogue: {fileID: 475953135}
-  objectName: {fileID: 948738661}
+  locationName: {fileID: 0}
   nextButton: {fileID: 606579329}
   map1: {fileID: 1325377840}
   map2: {fileID: 1661676288}
@@ -1707,6 +1707,7 @@ MonoBehaviour:
   backward: {fileID: 294365152}
   left: {fileID: 334627129}
   right: {fileID: 968003475}
+  currentLocation: {fileID: 0}
   typewriterSound: {fileID: 1206315203}
 --- !u!82 &1206315203
 AudioSource:

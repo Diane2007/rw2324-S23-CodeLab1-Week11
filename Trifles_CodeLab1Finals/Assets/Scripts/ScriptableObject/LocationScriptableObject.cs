@@ -11,7 +11,7 @@ using UnityEngine;
 public class LocationScriptableObject : ScriptableObject
 {
     public string locationName;
-    public string locationDescription;
+    public TextAsset locationDescription;
 
     public LocationScriptableObject forwardLocation, backwardLocation, leftLocation, rightLocation;
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b13f3c499534f3ea9caeac184b9262, type: 3}
+  m_Name: 1fl Front Door
+  m_EditorClassIdentifier: 
+  locationName: Front Door
+  locationDescription: {fileID: 4900000, guid: 81ae69348de943569fb60a5b54d2cd86, type: 3}
+  forwardLocation: {fileID: 11400000, guid: 192de833dbc4442178fb87ba820f9510, type: 2}
+  backwardLocation: {fileID: 11400000, guid: 063408156d66e43559b03102f98f9301, type: 2}
+  leftLocation: {fileID: 0}
+  rightLocation: {fileID: 0}
