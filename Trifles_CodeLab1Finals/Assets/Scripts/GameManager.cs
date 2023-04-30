@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System.Net.Mime;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI dialogue, objectName;
     public Button nextButton;
-    public GameObject map1, map2;
-
+    
+    //UI elements
+    public GameObject map1, map2, player;
 
     //init File.IO stuff
     const string TEXT_NAME = "textNum.txt";
@@ -25,7 +27,6 @@ public class GameManager : MonoBehaviour
     
     //numbers to load texts
     int currentTextFile = 0;
-
     public int CurrentTextFile
     {
         get { return currentTextFile; }
@@ -55,10 +56,11 @@ public class GameManager : MonoBehaviour
         nextButton.gameObject.SetActive(false);
         objectName.gameObject.SetActive(false);
         
-        //no maps at the beginning of the game
+        //disable UI elements until player enters the ground floor
         map1.gameObject.SetActive(false);
         map2.gameObject.SetActive(false);
-        
+        player.gameObject.SetActive(false);
+
         //define file paths
         TEXT_PATH = Application.dataPath + TEXT_DIR + TEXT_NAME;
         
