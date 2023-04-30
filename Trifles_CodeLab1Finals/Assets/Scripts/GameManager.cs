@@ -45,6 +45,9 @@ public class GameManager : MonoBehaviour
             }
             else if (currentTextFile == 4)  //we enter the house here
             {
+                //disable next button for now
+                nextButton.gameObject.SetActive(false);
+                
                 //show the player and 1 fl minimap
                 map1.gameObject.SetActive(true);
                 player.gameObject.SetActive(true);
@@ -54,7 +57,8 @@ public class GameManager : MonoBehaviour
                 EnableLocationButtons(true);
                 
                 //load scriptable object files
-                ScrObjWithDialogue();
+                //ScrObjWithDialogue();
+                UpdateLocation();
             }
         }
     }
@@ -142,13 +146,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    //TODO incorporate scriptable objects with dialogue system
-    void ScrObjWithDialogue()
-    {
-        location.text = currentLocation.locationName;
-        
-    }
-
     //TODO: figure out how to invoke with parameters
      void Type(int num, char[] charArray)
     {
@@ -163,4 +160,92 @@ public class GameManager : MonoBehaviour
             dialogue.text += "\n" + "\n";
         }
     }
+     
+     
+     //TODO incorporate scriptable objects with dialogue system
+     void ScrObjWithDialogue()
+     {
+         //load the text from current scriptable object
+         location.text = currentLocation.locationName;
+         dialogue.text = currentLocation.locationDescription.text;
+
+     }
+
+     void UpdateLocation()
+     {
+         //load the text from current scriptable object
+         location.text = currentLocation.locationName;
+         dialogue.text = currentLocation.locationDescription.text;
+         
+         //if currentLocation's forwardLocation doesn't exist
+         //forward button is not interactable
+         if (!currentLocation.forwardLocation)
+         {
+             forward.interactable = false;
+         }
+         else
+         {
+             forward.interactable = true;
+             currentLocation.forwardLocation.backwardLocation = currentLocation;
+         }
+         
+         //if current location's backwardLocation doesn't exist
+         if (!currentLocation.backwardLocation)
+         {
+             backward.interactable = false;
+         }
+         else
+         {
+             backward.interactable = true;
+             currentLocation.backwardLocation.forwardLocation = currentLocation;
+         }
+         
+         //if current's left doesn't exist
+         if (!currentLocation.leftLocation)
+         {
+             left.interactable = false;
+         }
+         else
+         {
+             left.interactable = true;
+             currentLocation.leftLocation.rightLocation = currentLocation;
+         }
+         
+         //if current's right doesn't exist
+         if (!currentLocation.rightLocation)
+         {
+             right.interactable = false;
+         }
+         else
+         {
+             right.interactable = true;
+             currentLocation.rightLocation.leftLocation = currentLocation;
+         }
+     }
+     
+     //the button directions
+     //TODO: remember to update player position
+     public void ButtonDirection(int direction)
+     {
+         switch (direction)
+         {
+             case 0:    //forward
+                 currentLocation = currentLocation.forwardLocation;
+                 break;
+             case 1:    //backward
+                 currentLocation = currentLocation.backwardLocation;
+                 break;
+             case 2:    //left
+                 currentLocation = currentLocation.leftLocation;
+                 break;
+             case 3:    //right
+                 currentLocation = currentLocation.rightLocation;
+                 break;
+         }
+         
+         //update the texts
+         UpdateLocation();
+     }
+     
+     
 }
