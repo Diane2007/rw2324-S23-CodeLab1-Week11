@@ -33,7 +33,28 @@ public class GameManager : MonoBehaviour
         set
         {
             currentTextFile = value;
-            Invoke("DialogueSystem", 0.1f);
+
+            if (currentTextFile < 4)
+            {
+                DialogueSystem();
+            }
+            else if (currentTextFile == 4)
+            {
+                
+            }
+        }
+    }
+
+    public void LoadText()
+    {
+        if (currentTextFile < 4)
+        {
+            CurrentTextFile++;
+        }
+
+        else if (currentTextFile == 4)
+        {
+            map1.gameObject.SetActive(true);
         }
     }
 
@@ -72,10 +93,9 @@ public class GameManager : MonoBehaviour
         
     }
 
+    //TODO Fix the typing time issue
     void DialogueSystem()
     {
-        //TODO Fix the typing time issue
-
         //define the new text path to load
         string newTextPath = TEXT_PATH.Replace("Num", currentTextFile + "");
 
