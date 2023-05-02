@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -45,8 +44,8 @@ public class GameManager : MonoBehaviour
 
             if (currentTextFile < 4)
             {
+                nextButton.gameObject.SetActive(false);
                 DialogueSystem();
-                InvokeRepeating("TypeChar", 0, 0.05f);
             }
             else if (currentTextFile == 4)  //we enter the house here
             {
@@ -100,8 +99,7 @@ public class GameManager : MonoBehaviour
         
         //start the dialogue
         DialogueSystem();
-        InvokeRepeating("TypeChar", 0, 0.05f);
-        
+
     }
 
     //controlling all direction buttons in one go to make life easier
@@ -121,9 +119,14 @@ public class GameManager : MonoBehaviour
         
         //define the new text path to load
         string newTextPath = TEXT_PATH.Replace("Num", currentTextFile + "");
+        Debug.Log("Current text path: " + newTextPath);
 
+        Debug.Log("Should read text now!");
         //put each line in the text file into an array
         fileLines = File.ReadAllLines(newTextPath);
+        
+        Debug.Log("Should print text now!");
+        InvokeRepeating("TypeChar", 0, 0.05f);
 
         // for (int lineNum = 0; lineNum < fileLines.Length; lineNum++)
         // {
@@ -150,21 +153,6 @@ public class GameManager : MonoBehaviour
         
     }
 
-    //TODO: figure out how to invoke with parameters
-    //  void Type(int num, char[] charArray)
-    // {
-        // //type characters
-        // if (num < charArray.Length)
-        // {
-        //     dialogue.text += charArray[num];
-        // }
-        // //when we are at the end of the line, make an empty line
-        // else if (num == charArray.Length)
-        // {
-        //     dialogue.text += "\n" + "\n";
-        // }
-    // }
-
     void TypeChar()
     {
         //stop typing if we've finished all the lines
@@ -175,6 +163,8 @@ public class GameManager : MonoBehaviour
             
             //stop the typewriter sound
             typewriterSound.Stop();
+            
+            nextButton.gameObject.SetActive(true);
             
             //stop running this code
             return;
