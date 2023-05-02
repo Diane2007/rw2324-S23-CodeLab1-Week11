@@ -10,16 +10,28 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("Text")]
     public TextMeshProUGUI dialogue;
     public TextMeshProUGUI location;
-    public Button nextButton;
-    
+
+    [Header("UI Elements")]
     //UI elements
-    public GameObject map1, map2, player;
-    public Button forward, backward, left, right;
+    public GameObject map1;
+    public GameObject map2;
+    public GameObject player;
     
+    [Header("Buttons")]
+    public Button nextButton;
+    public Button forward;
+    public Button backward;
+    public Button left;
+    public Button right;
+    
+    [Space(10)]
     //connect with scriptable objects
     public LocationScriptableObject currentLocation;
+    public AudioSource typewriterSound;
+
 
     //init File.IO stuff
     const string TEXT_NAME = "textNum.txt";
@@ -30,9 +42,7 @@ public class GameManager : MonoBehaviour
     int lineIndex = 0;
     int charIndex = 0;
     string[] fileLines;
-
-    public AudioSource typewriterSound;
-
+    
     //numbers to load texts
     int currentTextFile = 0;
     public int CurrentTextFile
