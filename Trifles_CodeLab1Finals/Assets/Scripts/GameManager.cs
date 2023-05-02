@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
             if (currentTextFile < 4)
             {
                 nextButton.gameObject.SetActive(false);
+                //Debug.Log("Current text file num is: " + currentTextFile);
                 DialogueSystem();
             }
             else if (currentTextFile == 4)  //we enter the house here
@@ -120,37 +121,14 @@ public class GameManager : MonoBehaviour
         //define the new text path to load
         string newTextPath = TEXT_PATH.Replace("Num", currentTextFile + "");
         Debug.Log("Current text path: " + newTextPath);
+        Debug.Log("charIndex: " + charIndex + " & lineIndex: " + lineIndex);
 
-        Debug.Log("Should read text now!");
+        //Debug.Log("Should read text now!");
         //put each line in the text file into an array
         fileLines = File.ReadAllLines(newTextPath);
         
-        Debug.Log("Should print text now!");
+        //Debug.Log("Should print text now!");
         InvokeRepeating("TypeChar", 0, 0.05f);
-
-        // for (int lineNum = 0; lineNum < fileLines.Length; lineNum++)
-        // {
-        //     string lineContents = fileLines[lineNum];
-        //     
-        //     //break down the line into individual characters and put in an array
-        //     char[] lineChar = lineContents.ToCharArray();
-        //
-        //     //start typing individual characters!!
-        //      for (int charNum = 0; charNum < lineChar.Length + 1; charNum++)
-        //      {
-        //          //every character takes 0.05 sec to type
-        //          if (charNum < lineChar.Length)
-        //          {
-        //              dialogue.text += lineChar[charNum];
-        //          }
-        //          else if (charNum == lineChar.Length)
-        //          {
-        //              dialogue.text += "\n" + "\n";
-        //          }
-        //      }
-        // }
-        nextButton.gameObject.SetActive(true);
-        
     }
 
     void TypeChar()
@@ -165,6 +143,8 @@ public class GameManager : MonoBehaviour
             typewriterSound.Stop();
             
             nextButton.gameObject.SetActive(true);
+
+            lineIndex = 0;
             
             //stop running this code
             return;
