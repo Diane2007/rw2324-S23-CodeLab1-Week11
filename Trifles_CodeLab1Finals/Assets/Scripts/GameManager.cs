@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     const string TEXT_DIR = "/Resources/Texts/";
     const string DATA_DIR = "/Resources/Data/";
     string TEXT_PATH;
+    
+    int lineIndex = 0;
+    int charIndex = 0;
+    string[] fileLines;
 
     public AudioSource typewriterSound;
 
@@ -42,6 +46,7 @@ public class GameManager : MonoBehaviour
             if (currentTextFile < 4)
             {
                 DialogueSystem();
+                InvokeRepeating("TypeChar", 0, 0.05f);
             }
             else if (currentTextFile == 4)  //we enter the house here
             {
@@ -57,7 +62,6 @@ public class GameManager : MonoBehaviour
                 EnableLocationButtons(true);
                 
                 //load scriptable object files
-                //ScrObjWithDialogue();
                 UpdateLocation();
             }
         }
@@ -96,6 +100,7 @@ public class GameManager : MonoBehaviour
         
         //start the dialogue
         DialogueSystem();
+        InvokeRepeating("TypeChar", 0, 0.05f);
         
     }
 
@@ -111,53 +116,92 @@ public class GameManager : MonoBehaviour
     //TODO Fix the typing time issue
     void DialogueSystem()
     {
+        //play typewriter sound
+        typewriterSound.PlayOneShot(typewriterSound.clip);
+        
         //define the new text path to load
         string newTextPath = TEXT_PATH.Replace("Num", currentTextFile + "");
 
         //put each line in the text file into an array
-        string[] fileLines = File.ReadAllLines(newTextPath);
-        
-        //play typewriter sound
-        typewriterSound.PlayOneShot(typewriterSound.clip);
+        fileLines = File.ReadAllLines(newTextPath);
 
-        for (int lineNum = 0; lineNum < fileLines.Length; lineNum++)
-        {
-            string lineContents = fileLines[lineNum];
-            
-            //break down the line into individual characters and put in an array
-            char[] lineChar = lineContents.ToCharArray();
-
-            //start typing individual characters!!
-             for (int charNum = 0; charNum < lineChar.Length + 1; charNum++)
-             {
-                 //every character takes 0.05 sec to type
-                 if (charNum < lineChar.Length)
-                 {
-                     dialogue.text += lineChar[charNum];
-                 }
-                 else if (charNum == lineChar.Length)
-                 {
-                     dialogue.text += "\n" + "\n";
-                 }
-             }
-        }
-        typewriterSound.Stop();
+        // for (int lineNum = 0; lineNum < fileLines.Length; lineNum++)
+        // {
+        //     string lineContents = fileLines[lineNum];
+        //     
+        //     //break down the line into individual characters and put in an array
+        //     char[] lineChar = lineContents.ToCharArray();
+        //
+        //     //start typing individual characters!!
+        //      for (int charNum = 0; charNum < lineChar.Length + 1; charNum++)
+        //      {
+        //          //every character takes 0.05 sec to type
+        //          if (charNum < lineChar.Length)
+        //          {
+        //              dialogue.text += lineChar[charNum];
+        //          }
+        //          else if (charNum == lineChar.Length)
+        //          {
+        //              dialogue.text += "\n" + "\n";
+        //          }
+        //      }
+        // }
         nextButton.gameObject.SetActive(true);
         
     }
 
     //TODO: figure out how to invoke with parameters
-     void Type(int num, char[] charArray)
+    //  void Type(int num, char[] charArray)
+    // {
+        // //type characters
+        // if (num < charArray.Length)
+        // {
+        //     dialogue.text += charArray[num];
+        // }
+        // //when we are at the end of the line, make an empty line
+        // else if (num == charArray.Length)
+        // {
+        //     dialogue.text += "\n" + "\n";
+        // }
+    // }
+
+    void TypeChar()
     {
-        //type characters
-        if (num < charArray.Length)
+        //stop typing if we've finished all the lines
+        if (lineIndex >= fileLines.Length)
         {
-            dialogue.text += charArray[num];
+            //don't repeat invoke this function again
+            CancelInvoke("TypeChar");
+            
+            //stop the typewriter sound
+            typewriterSound.Stop();
+            
+            //stop running this code
+            return;
         }
-        //when we are at the end of the line, make an empty line
-        else if (num == charArray.Length)
+
+        //find the current line
+        string typeLine = fileLines[lineIndex];
+
+        //if we haven't finished typing a line
+        if (charIndex < typeLine.Length)
         {
+            //type the character
+            dialogue.text += typeLine[charIndex];
+            //char index increases for the next repeat invoke
+            charIndex++;
+        }
+        //if we have finished typing a line
+        else
+        {
+            //add an empty line
             dialogue.text += "\n" + "\n";
+            
+            //move to the next line
+            lineIndex++;
+            
+            //start at the first character
+            charIndex = 0;
         }
     }
      
@@ -176,7 +220,7 @@ public class GameManager : MonoBehaviour
          //load the text from current scriptable object
          location.text = currentLocation.locationName;
          dialogue.text = currentLocation.locationDescription.text;
-         
+
          //if currentLocation's forwardLocation doesn't exist
          //forward button is not interactable
          if (!currentLocation.forwardLocation)
