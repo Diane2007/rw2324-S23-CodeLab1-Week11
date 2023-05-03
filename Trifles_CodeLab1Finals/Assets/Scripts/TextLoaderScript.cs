@@ -13,7 +13,7 @@ public class TextLoaderScript : MonoBehaviour
         GameManager.instance.ClearPage();
         
         //play button sound
-        buttonSound.PlayOneShot(buttonSound.clip);
+        buttonSound.Play();
         
         //read the next text file
         GameManager.instance.LoadNextFile();

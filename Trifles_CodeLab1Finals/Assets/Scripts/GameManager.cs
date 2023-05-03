@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
             CancelInvoke("TypeChar");
             
             //stop the typewriter sound
-            //typewriterSound.Stop();
+            typewriterSound.Stop();
             
             //show the next button
             nextButton.gameObject.SetActive(true);

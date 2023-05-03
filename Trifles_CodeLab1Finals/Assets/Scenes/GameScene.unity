@@ -1195,7 +1195,7 @@ GameObject:
   - component: {fileID: 606579330}
   - component: {fileID: 606579329}
   - component: {fileID: 606579333}
-  - component: {fileID: 606579332}
+  - component: {fileID: 606579334}
   m_Layer: 5
   m_Name: NextButton
   m_TagString: Untagged
@@ -1318,7 +1318,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 606579327}
   m_CullTransparentMesh: 1
---- !u!82 &606579332
+--- !u!114 &606579333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606579327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c834f69eaeae469c91e540f9615da59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonSound: {fileID: 606579334}
+--- !u!82 &606579334
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1414,19 +1427,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &606579333
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 606579327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c834f69eaeae469c91e540f9615da59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonSound: {fileID: 606579332}
 --- !u!1 &643312943
 GameObject:
   m_ObjectHideFlags: 0
@@ -2396,7 +2396,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
