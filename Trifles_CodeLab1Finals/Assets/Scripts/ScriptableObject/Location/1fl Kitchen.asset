@@ -18,3 +18,5 @@ MonoBehaviour:
   backwardLocation: {fileID: 0}
   leftLocation: {fileID: 11400000, guid: 192de833dbc4442178fb87ba820f9510, type: 2}
   rightLocation: {fileID: 0}
+  exploreButton: {fileID: 0}
+  exploreQuestion: Should I look around?

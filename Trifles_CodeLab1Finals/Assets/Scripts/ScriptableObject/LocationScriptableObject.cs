@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(
     fileName = "New Location",
@@ -14,4 +15,8 @@ public class LocationScriptableObject : ScriptableObject
     public TextAsset locationDescription;
 
     public LocationScriptableObject forwardLocation, backwardLocation, leftLocation, rightLocation;
+
+    public Button exploreButton;
+    public string exploreQuestion;
+
 }

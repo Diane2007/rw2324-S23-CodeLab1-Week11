@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("Text")]
     public TextMeshProUGUI dialogue;
     public TextMeshProUGUI location;
+    public TextMeshProUGUI exploreQuestion;
 
     [Header("UI Elements")]
     //UI elements
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Buttons")]
     public Button nextButton;
+    public Button explore;
     public Button forward;
     public Button backward;
     public Button left;
@@ -92,14 +94,18 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //no next button when the game begins
+        //no buttons when the game begins
         nextButton.gameObject.SetActive(false);
+        explore.gameObject.SetActive(false);
+        
+        //don't show location at the beginning
         location.gameObject.SetActive(false);
         
         //disable UI elements until player enters the ground floor
         map1.gameObject.SetActive(false);
         map2.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
+        exploreQuestion.gameObject.SetActive(false);
         EnableLocationButtons(false);
 
         //define file paths
@@ -152,8 +158,10 @@ public class GameManager : MonoBehaviour
             //stop the typewriter sound
             typewriterSound.Stop();
             
+            //show the next button
             nextButton.gameObject.SetActive(true);
 
+            //reset the line index or it would skip the next load
             lineIndex = 0;
             
             //stop running this code

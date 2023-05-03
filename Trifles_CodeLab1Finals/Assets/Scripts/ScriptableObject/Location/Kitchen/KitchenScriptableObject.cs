@@ -2,18 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(
+    fileName = "Kitchen Object",
+    menuName = "ScriptableObject/Location/KitchenObject",
+    order = 0
+)]
 public class KitchenScriptableObject : ScriptableObject
 {
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string objectName;
+    public TextAsset objectDescription;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
