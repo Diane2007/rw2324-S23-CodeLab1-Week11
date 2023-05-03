@@ -15,6 +15,6 @@ MonoBehaviour:
   locationName: Party Telephone Flyer
   locationDescription: {fileID: 4900000, guid: 9e640820b78546c4a039c6977ceb10a4, type: 3}
   forwardLocation: {fileID: 0}
-  backwardLocation: {fileID: 11400000, guid: 80dfd3403886348079b03168de7f1be3, type: 2}
+  backwardLocation: {fileID: 11400000, guid: f7a48965df24e4196be23ba5af695018, type: 2}
   leftLocation: {fileID: 0}
   rightLocation: {fileID: 11400000, guid: a0288cd484f87466fb30ada7ac9d5937, type: 2}

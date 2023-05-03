@@ -219,7 +219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Look Around
+  m_text: Listen in
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 89e6123215ce94469af1f526ca3fbe7d, type: 2}
   m_sharedMaterial: {fileID: -6122006873918112839, guid: 89e6123215ce94469af1f526ca3fbe7d, type: 2}
@@ -1698,7 +1698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &803036635
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1763,7 +1763,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 803036637}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1206315202}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ShowTriggeredText
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &803036637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2349,10 +2361,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue: {fileID: 475953135}
   location: {fileID: 948738661}
+  exploreQuestion: {fileID: 1920520565}
   map1: {fileID: 1325377840}
   map2: {fileID: 1661676288}
   player: {fileID: 1095961694}
   nextButton: {fileID: 606579329}
+  exploreButton: {fileID: 803036636}
   forward: {fileID: 1914717732}
   backward: {fileID: 294365152}
   left: {fileID: 334627129}
@@ -3328,7 +3342,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1920520564
 RectTransform:
   m_ObjectHideFlags: 0

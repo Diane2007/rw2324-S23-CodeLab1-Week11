@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: LR Rocking Chair
   m_EditorClassIdentifier: 
   locationName: Rocking Chair
-  locationDescription: {fileID: 0}
+  locationDescription: {fileID: 4900000, guid: 316db4f0d8004db5b98998899e3f4296, type: 3}
+  triggeredText: {fileID: 4900000, guid: 8c5ecb9572c8403386ad7b2c44e83b16, type: 3}
   forwardLocation: {fileID: 11400000, guid: 774d5235a4841401388028dd8cb40eb6, type: 2}
   backwardLocation: {fileID: 11400000, guid: 22771968726dc419f8fd8a82d7853755, type: 2}
   leftLocation: {fileID: 0}
   rightLocation: {fileID: 0}
+  buttonInt: 1
+  buttonText: Listen in
+  exploreQuestion: Should I listen in?

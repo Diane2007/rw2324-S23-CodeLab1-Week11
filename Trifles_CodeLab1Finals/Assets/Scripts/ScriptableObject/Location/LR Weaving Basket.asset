@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: LR Weaving Basket
   m_EditorClassIdentifier: 
   locationName: Weaving Basket
-  locationDescription: {fileID: 0}
-  forwardLocation: {fileID: 11400000, guid: 80dfd3403886348079b03168de7f1be3, type: 2}
+  locationDescription: {fileID: 4900000, guid: 0097d31359f849b6be719b243903ebc6, type: 3}
+  triggeredText: {fileID: 0}
+  forwardLocation: {fileID: 11400000, guid: f7a48965df24e4196be23ba5af695018, type: 2}
   backwardLocation: {fileID: 0}
   leftLocation: {fileID: 0}
   rightLocation: {fileID: 0}
+  buttonInt: 0
+  buttonText: 
+  exploreQuestion: 

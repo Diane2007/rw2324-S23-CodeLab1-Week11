@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("Text")]
     public TextMeshProUGUI dialogue;
     public TextMeshProUGUI location;
-    //public TextMeshProUGUI exploreQuestion;
+    public TextMeshProUGUI exploreQuestion;
 
     [Header("UI Elements")]
     //UI elements
@@ -23,7 +23,9 @@ public class GameManager : MonoBehaviour
     
     [Header("Buttons")]
     public Button nextButton;
-    //public Button explore;
+    public Button exploreButton;
+    
+    [Space(10)]
     public Button forward;
     public Button backward;
     public Button left;
@@ -95,7 +97,7 @@ public class GameManager : MonoBehaviour
     {
         //no buttons when the game begins
         nextButton.gameObject.SetActive(false);
-        //explore.gameObject.SetActive(false);
+        exploreButton.gameObject.SetActive(false);
         
         //don't show location at the beginning
         location.gameObject.SetActive(false);
@@ -104,7 +106,7 @@ public class GameManager : MonoBehaviour
         map1.gameObject.SetActive(false);
         map2.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
-        //exploreQuestion.gameObject.SetActive(false);
+        exploreQuestion.gameObject.SetActive(false);
         EnableLocationButtons(false);
 
         //define file paths
@@ -191,7 +193,7 @@ public class GameManager : MonoBehaviour
             //if there is a * in the txt file
             if (typeLine[charIndex] == '*')
             {
-                Invoke("ClearPage", 3f);   //clear the page after 3 sec
+                Invoke("ClearPage", 5f);   //clear the page after 3 sec
             }
             
             //char index increases for the next repeat invoke
@@ -215,22 +217,52 @@ public class GameManager : MonoBehaviour
     {
         dialogue.text = string.Empty;
     }
-     
-     
-     //TODO incorporate scriptable objects with dialogue system
-     void ScrObjWithDialogue()
-     {
-         //load the text from current scriptable object
-         location.text = currentLocation.locationName;
-         dialogue.text = currentLocation.locationDescription.text;
 
-     }
+    //attached to the exploreButton to show triggered text only (from crime scene objects)
+    public void ShowTriggeredText()
+    {
+        //clear the screen first
+        dialogue.text = string.Empty;
+        exploreQuestion.gameObject.SetActive(false);
+        
+        //read the triggered txt attached to that SO
+        //and split it by lines, store into this array
+        fileLines = currentLocation.triggeredText.text.Split('\n');
+        
+        //the button is no longer interactable
+        exploreButton.interactable = false;
+        
+        //type characters like a typewriter again
+        InvokeRepeating("TypeChar", 1, 0.05f);
+        exploreButton.gameObject.SetActive(false);
+
+    }
 
      void UpdateLocation()
      {
          //load the text from current scriptable object
          location.text = currentLocation.locationName;
          dialogue.text = currentLocation.locationDescription.text;
+
+         //if the buttonInt is 1, show the exploreButton to trigger more text
+         if (currentLocation.buttonInt == 1)
+         {
+             exploreButton.gameObject.SetActive(true);
+             exploreQuestion.text = currentLocation.exploreQuestion;
+         }
+         
+         //
+         // //if there is some explore question in the SO
+         // if (currentLocation.exploreQuestion != null)
+         // {
+         //     //customize the explore question
+         //     exploreQuestion.text = currentLocation.exploreQuestion;
+         // }
+         // else
+         // {
+         //     //if there isn't, don't show the explore question
+         //     exploreQuestion.gameObject.SetActive(false);
+         // }
 
          //if currentLocation's forwardLocation doesn't exist
          //forward button is not interactable
@@ -279,7 +311,7 @@ public class GameManager : MonoBehaviour
      }
      
      //the button directions
-     //TODO: remember to update player position
+     //TODO: remember to update player position, and add button sound!
      public void ButtonDirection(int direction)
      {
          switch (direction)
