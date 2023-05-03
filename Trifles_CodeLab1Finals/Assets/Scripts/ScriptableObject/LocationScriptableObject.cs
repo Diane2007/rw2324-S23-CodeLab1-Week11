@@ -15,8 +15,8 @@ public class LocationScriptableObject : ScriptableObject
     public TextAsset locationDescription;
 
     public LocationScriptableObject forwardLocation, backwardLocation, leftLocation, rightLocation;
-
-    public Button exploreButton;
-    public string exploreQuestion;
+    
+    //public Button exploreButton;
+    //public string exploreQuestion;
 
 }

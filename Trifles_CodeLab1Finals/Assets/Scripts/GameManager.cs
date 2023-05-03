@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [Header("Text")]
     public TextMeshProUGUI dialogue;
     public TextMeshProUGUI location;
-    public TextMeshProUGUI exploreQuestion;
+    //public TextMeshProUGUI exploreQuestion;
 
     [Header("UI Elements")]
     //UI elements
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     
     [Header("Buttons")]
     public Button nextButton;
-    public Button explore;
+    //public Button explore;
     public Button forward;
     public Button backward;
     public Button left;
@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     //connect with scriptable objects
     public LocationScriptableObject currentLocation;
     public AudioSource typewriterSound;
-
 
     //init File.IO stuff
     const string TEXT_NAME = "textNum.txt";
@@ -96,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         //no buttons when the game begins
         nextButton.gameObject.SetActive(false);
-        explore.gameObject.SetActive(false);
+        //explore.gameObject.SetActive(false);
         
         //don't show location at the beginning
         location.gameObject.SetActive(false);
@@ -105,7 +104,7 @@ public class GameManager : MonoBehaviour
         map1.gameObject.SetActive(false);
         map2.gameObject.SetActive(false);
         player.gameObject.SetActive(false);
-        exploreQuestion.gameObject.SetActive(false);
+        //exploreQuestion.gameObject.SetActive(false);
         EnableLocationButtons(false);
 
         //define file paths
@@ -128,18 +127,30 @@ public class GameManager : MonoBehaviour
         right.gameObject.SetActive(state);
     }
 
-    //TODO Fix the typing time issue
+    public void LoadNextFile()
+    {
+        CurrentTextFile++;
+    }
+
+    //TODO Fix the audio issue.
+    //isPlaying is not null at the supposed play time, and the audio clip is debugged correctly. Just no sound.
     void DialogueSystem()
     {
         //play typewriter sound
-        typewriterSound.PlayOneShot(typewriterSound.clip);
+        if (typewriterSound)
+        {
+            typewriterSound.Play();
+            Debug.Log("Play: " + typewriterSound.clip);
+        }
+        
+        if (typewriterSound.isPlaying)
+        {
+            Debug.Log("Sound playing!");
+        }
         
         //define the new text path to load
         string newTextPath = TEXT_PATH.Replace("Num", currentTextFile + "");
-        Debug.Log("Current text path: " + newTextPath);
-        Debug.Log("charIndex: " + charIndex + " & lineIndex: " + lineIndex);
-
-        //Debug.Log("Should read text now!");
+        
         //put each line in the text file into an array
         fileLines = File.ReadAllLines(newTextPath);
         
@@ -156,7 +167,7 @@ public class GameManager : MonoBehaviour
             CancelInvoke("TypeChar");
             
             //stop the typewriter sound
-            typewriterSound.Stop();
+            //typewriterSound.Stop();
             
             //show the next button
             nextButton.gameObject.SetActive(true);
@@ -176,6 +187,13 @@ public class GameManager : MonoBehaviour
         {
             //type the character
             dialogue.text += typeLine[charIndex];
+            
+            //if there is a * in the txt file
+            if (typeLine[charIndex] == '*')
+            {
+                Invoke("ClearPage", 3f);   //clear the page after 3 sec
+            }
+            
             //char index increases for the next repeat invoke
             charIndex++;
         }
@@ -191,6 +209,11 @@ public class GameManager : MonoBehaviour
             //start at the first character
             charIndex = 0;
         }
+    }
+
+    public void ClearPage()
+    {
+        dialogue.text = string.Empty;
     }
      
      

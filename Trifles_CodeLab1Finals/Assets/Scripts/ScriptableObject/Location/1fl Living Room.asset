@@ -16,5 +16,5 @@ MonoBehaviour:
   locationDescription: {fileID: 4900000, guid: 1b38a0a3df9a44c4a44629cbb3d89180, type: 3}
   forwardLocation: {fileID: 11400000, guid: 274326aed6f2a4e28b5cf00a7430b103, type: 2}
   backwardLocation: {fileID: 11400000, guid: 2dd99e681ff0b4e90bac1cb28cbe8074, type: 2}
-  leftLocation: {fileID: 0}
-  rightLocation: {fileID: 11400000, guid: fb9b8eecfacb54c4ebf7d055d2053e20, type: 2}
+  leftLocation: {fileID: 11400000, guid: a0288cd484f87466fb30ada7ac9d5937, type: 2}
+  rightLocation: {fileID: 11400000, guid: bb3a6369b7aa041bc98d7dac99fbd5d5, type: 2}

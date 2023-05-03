@@ -10,13 +10,13 @@ public class TextLoaderScript : MonoBehaviour
     public void NextTextFile()
     {
         //clean the dialogue on screen
-        GameManager.instance.dialogue.text = string.Empty;
+        GameManager.instance.ClearPage();
         
         //play button sound
         buttonSound.PlayOneShot(buttonSound.clip);
         
         //read the next text file
-        GameManager.instance.CurrentTextFile++;
+        GameManager.instance.LoadNextFile();
     }
     
 }
