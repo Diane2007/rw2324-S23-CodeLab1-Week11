@@ -142,13 +142,13 @@ public class GameManager : MonoBehaviour
         if (typewriterSound)
         {
             typewriterSound.Play();
-            Debug.Log("Play: " + typewriterSound.clip);
+            //Debug.Log("Play: " + typewriterSound.clip);
         }
         
-        if (typewriterSound.isPlaying)
-        {
-            Debug.Log("Sound playing!");
-        }
+        // if (typewriterSound.isPlaying)
+        // {
+        //     Debug.Log("Sound playing!");
+        // }
         
         //define the new text path to load
         string newTextPath = TEXT_PATH.Replace("Num", currentTextFile + "");
