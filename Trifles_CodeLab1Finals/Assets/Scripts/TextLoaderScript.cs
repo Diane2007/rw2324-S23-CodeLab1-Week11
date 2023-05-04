@@ -15,8 +15,22 @@ public class TextLoaderScript : MonoBehaviour
         //play button sound
         buttonSound.PlayOneShot(buttonSound.clip);
         
-        //read the next text file
-        GameManager.instance.LoadNextFile();
+        InvokeRepeating("WaitUntilSoundEnds", 1, 0.5f);
+
     }
-    
+
+    void WaitUntilSoundEnds()
+    {
+        if (buttonSound.isPlaying)
+        {
+            return;
+        }
+        else
+        {
+            //read the next text file
+            GameManager.instance.LoadNextFile();
+            CancelInvoke("WaitUntilSoundEnds");
+        }
+    }
+
 }
