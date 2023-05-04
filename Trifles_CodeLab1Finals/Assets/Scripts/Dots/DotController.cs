@@ -11,6 +11,21 @@ public class DotController : MonoBehaviour
     //List<GameObject> dots2Fl;
     List<HeadCountHidden> dotsHidden;
 
+    public static DotController instance;
+
+    void Awake()
+    {
+        if (!instance)
+        {
+            DontDestroyOnLoad(gameObject);
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     void Start()
     {
         dots1Fl = GetComponentsInChildren<HeadCount1Fl>().ToList();

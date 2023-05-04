@@ -41,10 +41,15 @@ public class GameManager : MonoBehaviour
     const string TEXT_DIR = "/Resources/Texts/";
     const string DATA_DIR = "/Resources/Data/";
     string TEXT_PATH;
+    string newTextPath;
     
     int lineIndex = 0;
     int charIndex = 0;
     string[] fileLines;
+
+    //player sprite related
+    Vector3 roomLocation;
+    Vector3 playerLocation;
     
     //numbers to load texts
     int currentTextFile = 0;
@@ -69,6 +74,9 @@ public class GameManager : MonoBehaviour
                 //show the player and 1 fl minimap
                 map1.gameObject.SetActive(true);
                 player.gameObject.SetActive(true);
+                
+                //show the objects on 1fl
+                DotController.instance.Show1FlObjects(true);
                 
                 //enable the rest of UI elements
                 location.gameObject.SetActive(true);
@@ -95,6 +103,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        //define playerLocation
+        playerLocation = player.transform.position;
+
         //no buttons when the game begins
         nextButton.gameObject.SetActive(false);
         exploreButton.gameObject.SetActive(false);
@@ -113,7 +124,7 @@ public class GameManager : MonoBehaviour
         TEXT_PATH = Application.dataPath + TEXT_DIR + TEXT_NAME;
         
         //clear the text at the first frame of each scene
-        dialogue.text = string.Empty;
+        ClearPage();
         
         //start the dialogue
         DialogueSystem();
@@ -144,14 +155,9 @@ public class GameManager : MonoBehaviour
             typewriterSound.Play();
             //Debug.Log("Play: " + typewriterSound.clip);
         }
-        
-        // if (typewriterSound.isPlaying)
-        // {
-        //     Debug.Log("Sound playing!");
-        // }
-        
+
         //define the new text path to load
-        string newTextPath = TEXT_PATH.Replace("Num", currentTextFile + "");
+        newTextPath = TEXT_PATH.Replace("Num", currentTextFile + "");
         
         //put each line in the text file into an array
         fileLines = File.ReadAllLines(newTextPath);
@@ -162,6 +168,7 @@ public class GameManager : MonoBehaviour
 
     void TypeChar()
     {
+        Debug.Log("currently loading: " + newTextPath);
         //stop typing if we've finished all the lines
         if (lineIndex >= fileLines.Length)
         {
@@ -180,6 +187,48 @@ public class GameManager : MonoBehaviour
             //stop running this code
             return;
         }
+        
+        if (Input.GetMouseButton(0))
+        {
+            CancelInvoke("TypeChar");
+            typewriterSound.Stop();
+            
+            //show the next button
+            nextButton.gameObject.SetActive(true);
+
+            //reset the line and character index
+            lineIndex = 0;
+            charIndex = 0;
+
+            //clear the screen
+            ClearPage();
+            
+            //if player clicks on mouse, skip the typewriting
+            for (int lineNum = 0; lineNum < fileLines.Length; lineNum++)
+            {
+                string lineContents = fileLines[lineNum];
+            
+                char[] lineChar = lineContents.ToCharArray();
+            
+                for (int charNum = 0; charNum < lineChar.Length + 1; charNum++)
+                {
+                    if (charNum < lineChar.Length)
+                    {
+                        dialogue.text += lineChar[charNum];
+                    }
+                    
+                    //add an empty line in between each lines from txt
+                    else if (charNum == lineChar.Length)
+                    {
+                        dialogue.text += "\n" + "\n";
+                    }
+                }
+            }
+            
+            //stop running this code
+            return;
+        }
+        
 
         //find the current line
         string typeLine = fileLines[lineIndex];
@@ -222,8 +271,11 @@ public class GameManager : MonoBehaviour
     public void ShowTriggeredText()
     {
         //clear the screen first
-        dialogue.text = string.Empty;
+        ClearPage();
         exploreQuestion.gameObject.SetActive(false);
+        
+        //start typewriter sound
+        typewriterSound.Play();
         
         //read the triggered txt attached to that SO
         //and split it by lines, store into this array
@@ -250,19 +302,6 @@ public class GameManager : MonoBehaviour
              exploreButton.gameObject.SetActive(true);
              exploreQuestion.text = currentLocation.exploreQuestion;
          }
-         
-         //
-         // //if there is some explore question in the SO
-         // if (currentLocation.exploreQuestion != null)
-         // {
-         //     //customize the explore question
-         //     exploreQuestion.text = currentLocation.exploreQuestion;
-         // }
-         // else
-         // {
-         //     //if there isn't, don't show the explore question
-         //     exploreQuestion.gameObject.SetActive(false);
-         // }
 
          //if currentLocation's forwardLocation doesn't exist
          //forward button is not interactable
@@ -308,6 +347,20 @@ public class GameManager : MonoBehaviour
              right.interactable = true;
              currentLocation.rightLocation.leftLocation = currentLocation;
          }
+
+         if (currentLocation.locationName == "Living Room")
+         {
+             GoTo(GoToRoom.instance.livingRoom);
+             Debug.Log("Living room location: " + roomLocation);
+             player.transform.position = roomLocation;
+             Debug.Log("Player location: " + playerLocation);
+         }
+
+     }
+
+     public void GoTo(GameObject gameObject)
+     {
+         roomLocation = gameObject.transform.position;
      }
      
      //the button directions
@@ -329,10 +382,9 @@ public class GameManager : MonoBehaviour
                  currentLocation = currentLocation.rightLocation;
                  break;
          }
-         
+
          //update the texts
          UpdateLocation();
      }
-     
-     
+
 }

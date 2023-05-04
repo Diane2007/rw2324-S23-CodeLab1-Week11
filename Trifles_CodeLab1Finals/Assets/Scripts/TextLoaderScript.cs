@@ -5,7 +5,7 @@ using UnityEngine;
 public class TextLoaderScript : MonoBehaviour
 {
     public AudioSource buttonSound;
-    
+
     //when the next button is clicked
     public void NextTextFile()
     {
@@ -15,7 +15,7 @@ public class TextLoaderScript : MonoBehaviour
         //play button sound
         buttonSound.PlayOneShot(buttonSound.clip);
         
-        InvokeRepeating("WaitUntilSoundEnds", 1, 0.5f);
+        InvokeRepeating("WaitUntilSoundEnds", 0.5f, 0.5f);
 
     }
 
