@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     //connect with scriptable objects
     public LocationScriptableObject currentLocation;
     public AudioSource typewriterSound;
+    public AudioSource buttonSound;
 
     //init File.IO stuff
     const string TEXT_NAME = "textNum.txt";
@@ -42,7 +43,7 @@ public class GameManager : MonoBehaviour
     const string DATA_DIR = "/Resources/Data/";
     string TEXT_PATH;
     string newTextPath;
-    
+
     int lineIndex = 0;
     int charIndex = 0;
     string[] fileLines;
@@ -139,7 +140,7 @@ public class GameManager : MonoBehaviour
         left.gameObject.SetActive(state);
         right.gameObject.SetActive(state);
     }
-
+    
     public void LoadNextFile()
     {
         CurrentTextFile++;
@@ -188,6 +189,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         
+        //if player clicks on mouse, skip the typewriting
         if (Input.GetMouseButton(0))
         {
             CancelInvoke("TypeChar");
@@ -196,14 +198,14 @@ public class GameManager : MonoBehaviour
             //show the next button
             nextButton.gameObject.SetActive(true);
 
-            //reset the line and character index
+            //reset the line and character index or the text in following loads wouldn't show correctly
             lineIndex = 0;
             charIndex = 0;
 
             //clear the screen
             ClearPage();
             
-            //if player clicks on mouse, skip the typewriting
+            //load all text on screen
             for (int lineNum = 0; lineNum < fileLines.Length; lineNum++)
             {
                 string lineContents = fileLines[lineNum];
@@ -347,26 +349,42 @@ public class GameManager : MonoBehaviour
              right.interactable = true;
              currentLocation.rightLocation.leftLocation = currentLocation;
          }
-
+         
          if (currentLocation.locationName == "Living Room")
          {
              GoTo(GoToRoom.instance.livingRoom);
-             Debug.Log("Living room location: " + roomLocation);
-             player.transform.position = roomLocation;
-             Debug.Log("Player location: " + playerLocation);
+         }
+
+         if (currentLocation.locationName == "Front Door")
+         {
+             GoTo(GoToRoom.instance.frontDoor);
+         }
+
+         if (currentLocation.locationName == "Kitchen")
+         {
+             GoTo(GoToRoom.instance.kitchen);
+         }
+
+         if (currentLocation.locationName == "Stairs 1st Floor")
+         {
+             GoTo(GoToRoom.instance.stairs_1);
          }
 
      }
-
+     
      public void GoTo(GameObject gameObject)
      {
          roomLocation = gameObject.transform.position;
+         player.transform.position = roomLocation;
      }
-     
+
      //the button directions
-     //TODO: remember to update player position, and add button sound!
+     //TODO: add button sound!
      public void ButtonDirection(int direction)
      {
+         //play sound when clicking on the direction button
+         buttonSound.PlayOneShot(buttonSound.clip);
+
          switch (direction)
          {
              case 0:    //forward

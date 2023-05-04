@@ -10,7 +10,7 @@ public class GoToRoom : MonoBehaviour
     [Header("First Floor")] 
     public GameObject livingRoom;
     public GameObject frontDoor;
-    public GameObject Kitchen;
+    public GameObject kitchen;
     public GameObject stairs_1;
 
     void Awake()
@@ -24,6 +24,11 @@ public class GoToRoom : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void GetLocation(GameObject obj)
+    {
+        //GameManager.instance.roomLocation = gameObject.transform.position;
     }
 
 }

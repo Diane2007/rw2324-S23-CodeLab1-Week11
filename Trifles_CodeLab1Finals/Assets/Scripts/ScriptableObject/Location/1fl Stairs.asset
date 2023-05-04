@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b13f3c499534f3ea9caeac184b9262, type: 3}
   m_Name: 1fl Stairs
   m_EditorClassIdentifier: 
-  locationName: Staircase
+  locationName: Stairs 1st Floor
   locationDescription: {fileID: 4900000, guid: 5ddf337eac1b43e7bad59a0e36057515, type: 3}
+  triggeredText: {fileID: 0}
   forwardLocation: {fileID: 0}
   backwardLocation: {fileID: 11400000, guid: 192de833dbc4442178fb87ba820f9510, type: 2}
   leftLocation: {fileID: 0}
   rightLocation: {fileID: 0}
+  buttonInt: 0
+  buttonText: 
+  exploreQuestion: 
