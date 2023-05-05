@@ -178,7 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   livingRoom: {fileID: 1971684223}
   frontDoor: {fileID: 1934183878}
-  kitchen: {fileID: 0}
+  kitchen: {fileID: 1931582879}
   stairs_1: {fileID: 2019960883}
 --- !u!1 &79050874
 GameObject:
@@ -2301,7 +2301,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 10
   m_Sprite: {fileID: 21300000, guid: ee7670b68f7974c15b17d0543bce577e, type: 3}
   m_Color: {r: 0.9528302, g: 0.83733636, b: 0.30113026, a: 1}
   m_FlipX: 0
@@ -2393,6 +2393,8 @@ MonoBehaviour:
   currentLocation: {fileID: 11400000, guid: 2dd99e681ff0b4e90bac1cb28cbe8074, type: 2}
   typewriterSound: {fileID: 1206315203}
   buttonSound: {fileID: 1559656804}
+  obj1Fl: {fileID: 552042617}
+  objHidden: {fileID: 2005210235}
 --- !u!82 &1206315203
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3608,6 +3610,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920520563}
   m_CullTransparentMesh: 1
+--- !u!1 &1931582879 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5816161001344201019, guid: e8d49def55c3144ea9195170cbef838b, type: 3}
+  m_PrefabInstance: {fileID: 670613297}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1934183876
 PrefabInstance:
   m_ObjectHideFlags: 0

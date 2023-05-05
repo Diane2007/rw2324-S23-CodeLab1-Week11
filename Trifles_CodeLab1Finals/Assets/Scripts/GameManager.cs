@@ -37,6 +37,11 @@ public class GameManager : MonoBehaviour
     public AudioSource typewriterSound;
     public AudioSource buttonSound;
 
+    [Header("Objects")]
+    public HeadCount1Fl obj1Fl;
+    //TODO add 2nd floor objs
+    public HeadCountHidden objHidden;
+
     //init File.IO stuff
     const string TEXT_NAME = "textNum.txt";
     const string TEXT_DIR = "/Resources/Texts/";
@@ -146,7 +151,6 @@ public class GameManager : MonoBehaviour
         CurrentTextFile++;
     }
 
-    //TODO Fix the audio issue.
     //isPlaying is not null at the supposed play time, and the audio clip is debugged correctly. Just no sound.
     void DialogueSystem()
     {
@@ -154,7 +158,6 @@ public class GameManager : MonoBehaviour
         if (typewriterSound)
         {
             typewriterSound.Play();
-            //Debug.Log("Play: " + typewriterSound.clip);
         }
 
         //define the new text path to load
@@ -162,14 +165,14 @@ public class GameManager : MonoBehaviour
         
         //put each line in the text file into an array
         fileLines = File.ReadAllLines(newTextPath);
-        
-        //Debug.Log("Should print text now!");
+
         InvokeRepeating("TypeChar", 0, 0.05f);
     }
 
     void TypeChar()
     {
-        Debug.Log("currently loading: " + newTextPath);
+        //Debug.Log("currently loading: " + newTextPath);
+        
         //stop typing if we've finished all the lines
         if (lineIndex >= fileLines.Length)
         {
@@ -350,6 +353,12 @@ public class GameManager : MonoBehaviour
              currentLocation.rightLocation.leftLocation = currentLocation;
          }
          
+         //move the player sprite to the according position
+         if (currentLocation.locationName == "Front Yard")
+         {
+             //just move it out of the screen bc I'm too lazy to toggle on and off stuff
+             player.transform.position = new Vector3(100, 100, 100);
+         }
          if (currentLocation.locationName == "Living Room")
          {
              GoTo(GoToRoom.instance.livingRoom);
@@ -370,6 +379,41 @@ public class GameManager : MonoBehaviour
              GoTo(GoToRoom.instance.stairs_1);
          }
 
+         if (currentLocation.locationName == "Party Telephone Flyer")
+         {
+             GoTo(obj1Fl.flyer);
+         }
+
+         if (currentLocation.locationName == "Fireplace with a Gun")
+         {
+             GoTo(obj1Fl.gun);
+         }
+
+         if (currentLocation.locationName == "Rocking Chair")
+         {
+             GoTo(obj1Fl.chair);
+         }
+
+         if (currentLocation.locationName == "Weaving Basket")
+         {
+             GoTo(obj1Fl.basket);
+         }
+
+         if (currentLocation.locationName == "Cabinet")
+         {
+             GoTo(objHidden.cabinet);
+         }
+
+         if (currentLocation.locationName == "Broken Jam Bottles")
+         {
+             GoTo(obj1Fl.jam);
+         }
+
+         if (currentLocation.locationName == "Dirty Sink")
+         {
+             GoTo(obj1Fl.sink);
+         }
+
      }
      
      public void GoTo(GameObject gameObject)
@@ -379,7 +423,6 @@ public class GameManager : MonoBehaviour
      }
 
      //the button directions
-     //TODO: add button sound!
      public void ButtonDirection(int direction)
      {
          //play sound when clicking on the direction button

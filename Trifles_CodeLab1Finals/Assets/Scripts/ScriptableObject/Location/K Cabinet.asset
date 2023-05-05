@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b13f3c499534f3ea9caeac184b9262, type: 3}
-  m_Name: LR Gun
+  m_Name: K Cabinet
   m_EditorClassIdentifier: 
-  locationName: Fireplace with a Gun
-  locationDescription: {fileID: 4900000, guid: a5a9462e2b7246a2bd2674cb65e90fbc, type: 3}
-  triggeredText: {fileID: 0}
-  forwardLocation: {fileID: 0}
+  locationName: Cabinet
+  locationDescription: {fileID: 0}
+  triggeredText: {fileID: 4900000, guid: 5ce49e30f7ea41a2b43e7b5999c5940e, type: 3}
+  forwardLocation: {fileID: 11400000, guid: efefa620d01d04e0ca55133595168207, type: 2}
   backwardLocation: {fileID: 0}
-  leftLocation: {fileID: 11400000, guid: 774d5235a4841401388028dd8cb40eb6, type: 2}
-  rightLocation: {fileID: 11400000, guid: 192de833dbc4442178fb87ba820f9510, type: 2}
+  leftLocation: {fileID: 0}
+  rightLocation: {fileID: 0}
   buttonInt: 0
   buttonText: 
   exploreQuestion: 

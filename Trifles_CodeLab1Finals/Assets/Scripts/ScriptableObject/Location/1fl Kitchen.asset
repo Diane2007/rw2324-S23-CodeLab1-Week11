@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationName: Kitchen
   locationDescription: {fileID: 4900000, guid: 0ca0fdc3d85145198b20256afd642638, type: 3}
-  forwardLocation: {fileID: 0}
-  backwardLocation: {fileID: 0}
+  triggeredText: {fileID: 0}
+  forwardLocation: {fileID: 11400000, guid: a98b748deb7e9433380a06361eaf8f08, type: 2}
+  backwardLocation: {fileID: 11400000, guid: efefa620d01d04e0ca55133595168207, type: 2}
   leftLocation: {fileID: 11400000, guid: 192de833dbc4442178fb87ba820f9510, type: 2}
   rightLocation: {fileID: 0}
-  exploreButton: {fileID: 0}
+  buttonInt: 0
+  buttonText: 
   exploreQuestion: Should I look around?
