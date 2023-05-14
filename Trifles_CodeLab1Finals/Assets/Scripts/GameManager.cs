@@ -212,7 +212,7 @@ public class GameManager : MonoBehaviour
             for (int lineNum = 0; lineNum < fileLines.Length; lineNum++)
             {
                 string lineContents = fileLines[lineNum];
-            
+
                 char[] lineChar = lineContents.ToCharArray();
             
                 for (int charNum = 0; charNum < lineChar.Length + 1; charNum++)
@@ -225,7 +225,7 @@ public class GameManager : MonoBehaviour
                     //add an empty line in between each lines from txt
                     else if (charNum == lineChar.Length)
                     {
-                        dialogue.text += "\n" + "\n";
+                        dialogue.text += "\n";
                     }
                 }
             }
@@ -244,12 +244,12 @@ public class GameManager : MonoBehaviour
             //type the character
             dialogue.text += typeLine[charIndex];
             
-            //if there is a * in the txt file
+            //use * in txt to clear page
             if (typeLine[charIndex] == '*')
             {
                 Invoke("ClearPage", 5f);   //clear the page after 3 sec
             }
-            
+       
             //char index increases for the next repeat invoke
             charIndex++;
         }

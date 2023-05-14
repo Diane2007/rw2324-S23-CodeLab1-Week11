@@ -1,2 +1,11 @@
-Trigger this dialogue.
-Yay yay yay.
+THE WITNESS, MR. HALE:
+    "I opened the door and there in that rocker sat Mrs. Wright."
+COUNTY ATTORNEY, MR. HENDERSON:
+    "What--was she doing?"
+THE WITNESS, MR. HALE:
+    "She was rockin’ back an forth. She had her apron in her hand and was kind of--pleating it."
+*
+COUNTY ATTORNEY, MR. HENDERSON:
+    "And how did she—look?"
+    
+    (TBC)
