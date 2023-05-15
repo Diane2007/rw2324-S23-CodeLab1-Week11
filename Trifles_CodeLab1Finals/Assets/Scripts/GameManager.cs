@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using Unity.VisualScripting;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("Buttons")]
     public Button nextButton;
     public Button exploreButton;
+    public TextMeshProUGUI exploreButtonText;
     
     [Space(10)]
     public Button forward;
@@ -39,7 +41,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Objects")]
     public HeadCount1Fl obj1Fl;
-    //TODO add 2nd floor objs
+    public HeadCount2Fl obj2Fl;
     public HeadCountHidden objHidden;
 
     //init File.IO stuff
@@ -225,7 +227,7 @@ public class GameManager : MonoBehaviour
                     //add an empty line in between each lines from txt
                     else if (charNum == lineChar.Length)
                     {
-                        dialogue.text += "\n";
+                        dialogue.text += "\n" + "\n";
                     }
                 }
             }
@@ -278,20 +280,34 @@ public class GameManager : MonoBehaviour
         //clear the screen first
         ClearPage();
         exploreQuestion.gameObject.SetActive(false);
-        
-        //start typewriter sound
-        typewriterSound.Play();
-        
-        //read the triggered txt attached to that SO
-        //and split it by lines, store into this array
-        fileLines = currentLocation.triggeredText.text.Split('\n');
-        
-        //the button is no longer interactable
-        exploreButton.interactable = false;
-        
-        //type characters like a typewriter again
-        InvokeRepeating("TypeChar", 1, 0.05f);
-        exploreButton.gameObject.SetActive(false);
+
+        //if the button's int is 1
+        if (currentLocation.buttonInt == 1)
+        {
+            //start typewriter sound
+            typewriterSound.Play();
+
+            //read the triggered txt attached to that SO
+            //and split it by lines, store into this array
+            fileLines = currentLocation.triggeredText.text.Split('\n');
+
+            //the button is no longer interactable
+            exploreButton.interactable = false;
+
+            //type characters like a typewriter again
+            InvokeRepeating("TypeChar", 1, 0.05f);
+            exploreButton.gameObject.SetActive(false);
+        }
+        else if (currentLocation.buttonInt == 2)
+        {
+            //show the 2nd floor UIs
+            DotController.instance.Show2FlObjects(true);
+            map2.gameObject.SetActive(true);
+            
+            //hide the 1st floor UIs
+            DotController.instance.Show1FlObjects(false);
+            map1.gameObject.SetActive(false);
+        }
 
     }
 
@@ -301,11 +317,34 @@ public class GameManager : MonoBehaviour
          location.text = currentLocation.locationName;
          dialogue.text = currentLocation.locationDescription.text;
 
+         //TODO: use the following when the 2nd floor is in
+         // if (currentLocation.buttonInt == 0)
+         // {
+         //     exploreButton.gameObject.SetActive(false);
+         //     exploreQuestion.gameObject.SetActive(false);
+         // }
+         // else
+         // {
+         //     exploreButton.gameObject.SetActive(true);      //show the button
+         //     exploreButton.interactable = true;
+         //     exploreQuestion.gameObject.SetActive(true);    //show the question
+         //     exploreQuestion.text = currentLocation.exploreQuestion;    //define that question
+         //     exploreButtonText.text = currentLocation.buttonText;  //change button text
+         // }
+         
          //if the buttonInt is 1, show the exploreButton to trigger more text
          if (currentLocation.buttonInt == 1)
          {
-             exploreButton.gameObject.SetActive(true);
-             exploreQuestion.text = currentLocation.exploreQuestion;
+             exploreButton.gameObject.SetActive(true);      //show the button
+             exploreButton.interactable = true;
+             exploreQuestion.gameObject.SetActive(true);    //show the question
+             exploreQuestion.text = currentLocation.exploreQuestion;    //define that question
+             exploreButtonText.text = currentLocation.buttonText;  //change button text
+         }
+         else
+         {
+             exploreButton.gameObject.SetActive(false);
+             exploreQuestion.gameObject.SetActive(false);
          }
 
          //if currentLocation's forwardLocation doesn't exist

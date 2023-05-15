@@ -19,6 +19,6 @@ MonoBehaviour:
   backwardLocation: {fileID: 11400000, guid: 192de833dbc4442178fb87ba820f9510, type: 2}
   leftLocation: {fileID: 0}
   rightLocation: {fileID: 0}
-  buttonInt: 0
-  buttonText: 
-  exploreQuestion: 
+  buttonInt: 2
+  buttonText: Go up
+  exploreQuestion: Should I go up?s

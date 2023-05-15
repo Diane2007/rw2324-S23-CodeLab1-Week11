@@ -8,7 +8,7 @@ public class DotController : MonoBehaviour
 {
     //all dots in each parent
     List<HeadCount1Fl> dots1Fl;
-    //List<GameObject> dots2Fl;
+    List<HeadCount2Fl> dots2Fl;
     List<HeadCountHidden> dotsHidden;
 
     public static DotController instance;
@@ -29,7 +29,7 @@ public class DotController : MonoBehaviour
     void Start()
     {
         dots1Fl = GetComponentsInChildren<HeadCount1Fl>().ToList();
-        //dots2Fl = parent2Fl.GetComponentsInChildren<GameObject>().ToList();
+        dots2Fl = GetComponentsInChildren<HeadCount2Fl>().ToList();
         dotsHidden = GetComponentsInChildren<HeadCountHidden>().ToList();
         
         //hide all dots in each category at start
@@ -44,14 +44,17 @@ public class DotController : MonoBehaviour
         //for each dot under the parent
         foreach (var dot in dots1Fl)
         {
-            dot.gameObject.SetActive(state);    //hide it
+            dot.gameObject.SetActive(state);
         }
     }
 
     //TODO: fill it in when 2fl objects are in
     public void Show2FlObjects(bool state)
     {
-
+        foreach (var dot in (dots2Fl))
+        {
+            dot.gameObject.SetActive(state);
+        }
     }
 
     public void ShowHiddenObjects(bool state)
